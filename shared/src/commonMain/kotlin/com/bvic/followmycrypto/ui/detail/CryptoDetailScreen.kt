@@ -2,7 +2,9 @@ package com.bvic.followmycrypto.ui.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -17,13 +19,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bvic.followmycrypto.data.AppContainer
 import com.bvic.followmycrypto.model.Crypto
-import com.bvic.followmycrypto.theme.FollowMyCryptoTheme
 import com.bvic.followmycrypto.ui.components.ErrorContent
 import com.bvic.followmycrypto.ui.components.LoadingContent
 import com.bvic.followmycrypto.ui.format.formatPercent
@@ -101,8 +102,26 @@ fun CryptoDetail(crypto: Crypto, modifier: Modifier = Modifier) {
         Text(
             text = "${formatPercent(crypto.changePercent)} sur 24h",
             style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
             color = if (crypto.changePercent >= 0) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.error,
         )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ){
+            Text(
+                text = "Plus haut 24h",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                fontSize = 18.sp
+            )
+            Text(
+                text = formatPrice(crypto.high24h),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+        }
     }
 }
 

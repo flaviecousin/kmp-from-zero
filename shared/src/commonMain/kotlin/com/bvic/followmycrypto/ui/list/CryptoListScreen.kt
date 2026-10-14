@@ -22,13 +22,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bvic.followmycrypto.data.AppContainer
 import com.bvic.followmycrypto.model.Crypto
-import com.bvic.followmycrypto.theme.FollowMyCryptoTheme
 import com.bvic.followmycrypto.ui.components.ErrorContent
 import com.bvic.followmycrypto.ui.components.LoadingContent
 import com.bvic.followmycrypto.ui.format.formatPercent
@@ -137,11 +135,11 @@ fun CryptoRow(crypto: Crypto, onClick: () -> Unit, modifier: Modifier = Modifier
     }
 }
 
-private val previewCryptos = listOf(
+/*private val previewCryptos = listOf(
     Crypto(symbol = "BTC", name = "Bitcoin", price = 85613.50, changePercent = 0.88),
     Crypto(symbol = "ETH", name = "Ethereum", price = 3214.07, changePercent = -1.42),
 )
-
+*/
 /*@Preview(showBackground = true)
 @Composable
 fun CryptoRowPreview() {
