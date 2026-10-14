@@ -1,6 +1,10 @@
 package com.bvic.followmycrypto
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,20 +21,43 @@ object ListRoute
 @Serializable
 data class DetailRoute(val symbol: String)
 
+
 @Composable
 fun App() {
-    FollowMyCryptoTheme {
+    var darkTheme by rememberSaveable {
+        mutableStateOf(false)
+    }
+
+    FollowMyCryptoTheme(darkTheme = darkTheme) {
         val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = ListRoute) {
+
+        NavHost(
+            navController = navController,
+            startDestination = ListRoute
+        ) {
             composable<ListRoute> {
                 CryptoListScreen(
-                    onCryptoClick = { symbol -> navController.navigate(DetailRoute(symbol)) },
+                    onCryptoClick = { symbol ->
+                        navController.navigate(DetailRoute(symbol))
+                    },
+                    isDarkTheme = darkTheme,
+                    onToggleTheme = {
+                        darkTheme = !darkTheme
+                    }
                 )
             }
+
             composable<DetailRoute> { backStackEntry ->
                 val route = backStackEntry.toRoute<DetailRoute>()
-                CryptoDetailScreen(symbol = route.symbol, onBack = { navController.popBackStack() })
+
+                CryptoDetailScreen(
+                    symbol = route.symbol,
+                    onBack = {
+                        navController.popBackStack()
+                    }
+                )
             }
         }
     }
 }
+

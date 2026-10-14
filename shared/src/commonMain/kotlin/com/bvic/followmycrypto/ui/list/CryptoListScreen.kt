@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.HorizontalDivider
@@ -35,6 +37,8 @@ import com.bvic.followmycrypto.ui.format.formatPrice
 @Composable
 fun CryptoListScreen(
     onCryptoClick: (String) -> Unit,
+    isDarkTheme: Boolean,
+    onToggleTheme: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: CryptoListViewModel = viewModel { CryptoListViewModel(AppContainer.cryptoRepository) },
 ) {
@@ -44,6 +48,8 @@ fun CryptoListScreen(
         uiState = uiState,
         onRefresh = viewModel::refresh,
         onCryptoClick = onCryptoClick,
+        isDarkTheme = isDarkTheme,
+        onToggleTheme = onToggleTheme,
         modifier = modifier,
     )
 }
@@ -54,6 +60,8 @@ fun CryptoListContent(
     uiState: CryptoListUiState,
     onRefresh: () -> Unit,
     onCryptoClick: (String) -> Unit,
+    isDarkTheme: Boolean,
+    onToggleTheme: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -61,6 +69,13 @@ fun CryptoListContent(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text("FollowMyCrypto", fontWeight = FontWeight.Bold) },
+                navigationIcon = {
+                    IconButton(onClick = onToggleTheme){
+                        Icon(imageVector = if (isDarkTheme) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                            contentDescription = "Changer de thème",
+                            tint = MaterialTheme.colorScheme.secondaryContainer)
+                    }
+                },
                 actions = {
                     IconButton(onClick = onRefresh) {
                         Icon(Icons.Filled.Refresh, contentDescription = "Rafraîchir", tint = MaterialTheme.colorScheme.secondaryContainer)

@@ -55,6 +55,7 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
+            implementation(compose.materialIconsExtended)
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -70,6 +71,7 @@ kotlin {
             implementation(libs.kotlinx.serializationJson)
             implementation(libs.navigation.compose)
             implementation(libs.compose.components.resources)
+            implementation(libs.material.icons.extended)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
