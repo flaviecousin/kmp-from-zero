@@ -29,8 +29,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bvic.followmycrypto.data.AppContainer
 import com.bvic.followmycrypto.model.Crypto
 import com.bvic.followmycrypto.theme.FollowMyCryptoTheme
-import com.bvic.followmycrypto.theme.PriceDown
-import com.bvic.followmycrypto.theme.PriceUp
 import com.bvic.followmycrypto.ui.components.ErrorContent
 import com.bvic.followmycrypto.ui.components.LoadingContent
 import com.bvic.followmycrypto.ui.format.formatPercent
@@ -67,7 +65,7 @@ fun CryptoListContent(
                 title = { Text("FollowMyCrypto", fontWeight = FontWeight.Bold) },
                 actions = {
                     IconButton(onClick = onRefresh) {
-                        Icon(Icons.Filled.Refresh, contentDescription = "Rafraîchir")
+                        Icon(Icons.Filled.Refresh, contentDescription = "Rafraîchir", tint = MaterialTheme.colorScheme.secondaryContainer)
                     }
                 },
             )
@@ -122,7 +120,7 @@ fun CryptoRow(crypto: Crypto, onClick: () -> Unit, modifier: Modifier = Modifier
             Text(
                 text = crypto.symbol,
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.secondaryContainer,
             )
         }
         Column(horizontalAlignment = Alignment.End) {
@@ -133,7 +131,7 @@ fun CryptoRow(crypto: Crypto, onClick: () -> Unit, modifier: Modifier = Modifier
             Text(
                 text = formatPercent(crypto.changePercent),
                 style = MaterialTheme.typography.bodySmall,
-                color = if (crypto.changePercent >= 0) PriceUp else PriceDown,
+                color = if (crypto.changePercent >= 0) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.error,
             )
         }
     }
@@ -144,14 +142,15 @@ private val previewCryptos = listOf(
     Crypto(symbol = "ETH", name = "Ethereum", price = 3214.07, changePercent = -1.42),
 )
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun CryptoRowPreview() {
     FollowMyCryptoTheme {
         CryptoRow(crypto = previewCryptos.first(), onClick = {})
     }
 }
-
+*/
+/*
 @Preview(showBackground = true)
 @Composable
 fun CryptoListContentPreview() {
@@ -159,7 +158,8 @@ fun CryptoListContentPreview() {
         CryptoListContent(uiState = CryptoListUiState.Success(previewCryptos), onRefresh = {}, onCryptoClick = {})
     }
 }
-
+*/
+/*
 @Preview(showBackground = true)
 @Composable
 fun CryptoListErrorPreview() {
@@ -167,3 +167,4 @@ fun CryptoListErrorPreview() {
         CryptoListContent(uiState = CryptoListUiState.Error("Impossible de charger les cours."), onRefresh = {}, onCryptoClick = {})
     }
 }
+*/

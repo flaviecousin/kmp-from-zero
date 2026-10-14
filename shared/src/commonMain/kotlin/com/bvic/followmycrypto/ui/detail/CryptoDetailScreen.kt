@@ -24,8 +24,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bvic.followmycrypto.data.AppContainer
 import com.bvic.followmycrypto.model.Crypto
 import com.bvic.followmycrypto.theme.FollowMyCryptoTheme
-import com.bvic.followmycrypto.theme.PriceDown
-import com.bvic.followmycrypto.theme.PriceUp
 import com.bvic.followmycrypto.ui.components.ErrorContent
 import com.bvic.followmycrypto.ui.components.LoadingContent
 import com.bvic.followmycrypto.ui.format.formatPercent
@@ -103,12 +101,12 @@ fun CryptoDetail(crypto: Crypto, modifier: Modifier = Modifier) {
         Text(
             text = "${formatPercent(crypto.changePercent)} sur 24h",
             style = MaterialTheme.typography.titleMedium,
-            color = if (crypto.changePercent >= 0) PriceUp else PriceDown,
+            color = if (crypto.changePercent >= 0) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.error,
         )
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun CryptoDetailContentPreview() {
     FollowMyCryptoTheme {
@@ -122,3 +120,4 @@ fun CryptoDetailContentPreview() {
         )
     }
 }
+*/

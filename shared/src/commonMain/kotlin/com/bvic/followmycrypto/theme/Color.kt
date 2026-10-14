@@ -2,6 +2,8 @@ package com.bvic.followmycrypto.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Ancien thème
+/*
 val Gold = Color(0xFFF0B90B)
 val Ink = Color(0xFF0B0E11)
 val Night = Color(0xFF161A1E)
@@ -17,3 +19,19 @@ val GoldDeep = Color(0xFF3C3314)
 // Couleurs des variations de prix
 val PriceUp = Color(0xFF0ECB81)
 val PriceDown = Color(0xFFF6465D)
+*/
+
+// Nouveau thème
+val DarkBackground = Color(0xFF0B1020)
+val DarkSurface = Color(0xFF17F35)
+val DarkPrimary = Color(0xFF8B7CFF)
+val DarkAccent = Color(0xFF54D6E8)
+val DarkSuccess = Color(0xFF49D6A5)
+val DarkError = Color(0xFFF18A9B)
+
+val LightBackground = Color(0xFFF5F7FC)
+val LightSurface = Color(0xFFFFFFFF)
+val LightPrimary = Color(0xFF6D5CE7)
+val LightAccent = Color(0xFF08F7F95)
+val LightSuccess = Color(0xFF12866A)
+val LightError = Color(0xFFC23F59)
