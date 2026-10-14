@@ -93,6 +93,7 @@ fun FollowMyCryptoTheme(
 ) {
     MaterialTheme(
         colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
-        content = content,
+        typography = appTypography(),
+        content = content
     )
 }

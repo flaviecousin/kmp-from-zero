@@ -91,7 +91,7 @@ fun CryptoDetail(crypto: Crypto, modifier: Modifier = Modifier) {
         Text(
             text = crypto.name,
             style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = MaterialTheme.colorScheme.secondaryContainer,
         )
         Text(
             text = formatPrice(crypto.price),
