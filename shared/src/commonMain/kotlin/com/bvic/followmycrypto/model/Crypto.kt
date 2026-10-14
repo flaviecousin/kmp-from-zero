@@ -5,5 +5,6 @@ data class Crypto(
     val name: String,
     val price: Double,
     val changePercent: Double,
-    val high24h: Double
+    val high24h: Double,
+    val low24h: Double
 )

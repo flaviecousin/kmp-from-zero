@@ -122,6 +122,23 @@ fun CryptoDetail(crypto: Crypto, modifier: Modifier = Modifier) {
                 fontSize = 18.sp
             )
         }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ){
+            Text(
+                text = "Plus bas 24h",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                fontSize = 18.sp
+            )
+            Text(
+                text = formatPrice(crypto.low24h),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+        }
     }
 }
 

@@ -8,5 +8,6 @@ data class TickerDto(
     val symbol: String,
     val lastPrice: String,
     val priceChangePercent: String,
-    val highPrice: String
+    val highPrice: String,
+    val lowPrice: String
 )
