@@ -1,5 +1,6 @@
 package com.bvic.followmycrypto
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,8 +25,9 @@ data class DetailRoute(val symbol: String)
 
 @Composable
 fun App() {
+    val systemDarkTheme = isSystemInDarkTheme()
     var darkTheme by rememberSaveable {
-        mutableStateOf(false)
+        mutableStateOf(systemDarkTheme)
     }
 
     FollowMyCryptoTheme(darkTheme = darkTheme) {
