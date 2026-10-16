@@ -34,7 +34,6 @@ class CryptoListViewModel(
         if (!initial){
             _isRefreshing.value =true
         }
-        //_uiState.value = CryptoListUiState.Loading
         viewModelScope.launch {
             if(initial){
                 _uiState.value = CryptoListUiState.Loading
@@ -42,9 +41,7 @@ class CryptoListViewModel(
             try {
                 _uiState.value = CryptoListUiState.Success(repository.getCryptos())
             } catch (e: Exception) {
-                if(initial || _uiState.value !is CryptoListUiState.Success){
-                    _uiState.value = CryptoListUiState.Error("Impossible de charger les cours.")
-                }
+                _uiState.value = CryptoListUiState.Error("Impossible de charger les cours.")
             }
             finally {
                 _isRefreshing.value = false
