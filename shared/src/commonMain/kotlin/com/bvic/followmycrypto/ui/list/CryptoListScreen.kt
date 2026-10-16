@@ -19,6 +19,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -43,9 +44,11 @@ fun CryptoListScreen(
     viewModel: CryptoListViewModel = viewModel { CryptoListViewModel(AppContainer.cryptoRepository) },
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
 
     CryptoListContent(
         uiState = uiState,
+        isRefreshing = isRefreshing,
         onRefresh = viewModel::refresh,
         onCryptoClick = onCryptoClick,
         isDarkTheme = isDarkTheme,
@@ -58,6 +61,7 @@ fun CryptoListScreen(
 @Composable
 fun CryptoListContent(
     uiState: CryptoListUiState,
+    isRefreshing: Boolean,
     onRefresh: () -> Unit,
     onCryptoClick: (String) -> Unit,
     isDarkTheme: Boolean,
@@ -92,11 +96,19 @@ fun CryptoListContent(
                 onRetry = onRefresh,
                 modifier = contentModifier,
             )
-            is CryptoListUiState.Success -> CryptoList(
-                cryptos = uiState.cryptos,
-                onCryptoClick = onCryptoClick,
-                modifier = contentModifier,
-            )
+            is CryptoListUiState.Success -> {
+                PullToRefreshBox(
+                    isRefreshing = isRefreshing,
+                    onRefresh = onRefresh,
+                    modifier = contentModifier
+                ){
+                    CryptoList(
+                        cryptos = uiState.cryptos,
+                        onCryptoClick = onCryptoClick,
+                        modifier = Modifier.fillMaxSize(),
+                    )
+                }
+            }
         }
     }
 }

@@ -18,19 +18,36 @@ class CryptoListViewModel(
     // Version en lecture seule, exposée à l'interface
     val uiState: StateFlow<CryptoListUiState> = _uiState.asStateFlow()
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
     init {
-        load()
+        load(initial = true)
     }
 
-    fun refresh() = load()
+    fun refresh() {
+        load(initial = false)
+    }
 
-    private fun load() {
-        _uiState.value = CryptoListUiState.Loading
+    private fun load(initial: Boolean) {
+        if(_isRefreshing.value) return
+        if (!initial){
+            _isRefreshing.value =true
+        }
+        //_uiState.value = CryptoListUiState.Loading
         viewModelScope.launch {
+            if(initial){
+                _uiState.value = CryptoListUiState.Loading
+            }
             try {
                 _uiState.value = CryptoListUiState.Success(repository.getCryptos())
             } catch (e: Exception) {
-                _uiState.value = CryptoListUiState.Error("Impossible de charger les cours.")
+                if(initial || _uiState.value !is CryptoListUiState.Success){
+                    _uiState.value = CryptoListUiState.Error("Impossible de charger les cours.")
+                }
+            }
+            finally {
+                _isRefreshing.value = false
             }
         }
     }
